@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+		<meta
+		  name="viewport"
+		  content="initial-scale=1, maximum-scale=1,user-scalable=no"
+		/>
+	<title>ABBASIYYEH</title>	
+	<link rel="stylesheet" href="https://js.arcgis.com/4.14/esri/themes/light/main.css"/> 
+	<script src="https://js.arcgis.com/4.14/"></script>
+	   <style>
+		  html,
+		  body,
+		  #viewDiv {
+			padding: 0;
+			margin: 0;
+			height: 100%;
+			width: 100%;
+			
+		  }
+		  #BasemapToggle { 
+			position: absolute;
+			top: 90px;
+			right: 5px;
+			z-index: 5;
+		  }
+		</style>
+	<script>
+	require(["esri/Map", "esri/views/MapView","esri/widgets/BasemapToggle","esri/widgets/BasemapGallery",
+	"esri/layers/FeatureLayer","esri/widgets/Legend","esri/widgets/LayerList","esri/widgets/Search","esri/widgets/Locate","esri/widgets/Home"], 
+		function(Map, MapView,BasemapToggle,BasemapGallery,FeatureLayer,Legend,LayerList,Search,Locate,Home) { 
+			var map = new Map({ basemap: "satellite" });
+			var view = new MapView({ 
+				container: "viewDiv", 
+				map: map, 
+				zoom: 14, 
+				center: [35.25, 33.29],
+				});
+			var homeWidget = new Home({
+				view: view
+				});
+
+				// adds the home widget to the top left corner of the MapView
+				view.ui.add(homeWidget, "top-left");
+			
+			 var locateWidget = new Locate({
+			    view: view 
+			   
+				});
+			view.ui.add(locateWidget, "top-left");	
+			var basemapToggle = new BasemapToggle(
+			{ view: view, 
+			nextBasemap: "streets" });
+				view.ui.add(basemapToggle, "top-left");
+			var basemapGallery = new BasemapGallery({
+				view: view,
+				source: {
+				portal: {
+				url: "https://www.arcgis.com",
+				useVectorBasemaps: true  
+						}
+				}
+				});
+				//view.ui.add(basemapGallery, "top-right");
+			var template = {
+              title: "parcels",
+			   content: [
+               {
+                      type: "fields",
+              fieldInfos: [
+                {
+                  fieldName: "رقم_العقار",
+                  label: "رقم_العقار"
+                },
+                {
+                  fieldName: "المنطقة",
+                  label: "classification",
+                  format: {
+                    digitSeparator: true,
+                    places: 0
+                  }
+                },
+                {
+                  fieldName: "Shape_Area",
+                  label: "area",
+                  format: {
+                    digitSeparator: true,
+                    places: 0
+                  }
+                },
+                ]
+						}
+					  ]
+					};	
+			var parcels = new FeatureLayer({ 
+				url: "http://localhost:6080/arcgis/rest/services/abbasiyeh/MapServer/2?f=pjson",popupTemplate: template
+				});
+				map.add(parcels);
+			
+			var legend = new Legend({
+				view: view, 
+				layerInfos: [ { layer: parcels,title: "parcels" }], });
+				view.ui.add(legend, "bottom-right");
+
+			var searchWidget = new Search({
+				  view: view,
+				  allPlaceholder: "search",
+				  sources: [
+					{
+					  layer: parcels,
+					  searchFields: ["رقم_العقار"],
+					  displayField: "رقم_العقار",
+					  exactMatch: true,
+					  outFields: ["رقم_العقار", "المنطقة", "Shape_Area"],
+					  name: "رقم العقار",
+					  placeholder: "بحث عن عقار"
+					},
+					]
+					});
+					view.ui.add(searchWidget, {
+					position: "top-right"
+				});
+			var layerList = new LayerList({ view: view });
+			view.ui.add(layerList, "buttom-right");
+		   
+	});
+	
+</script>
+
+</head>
+
+<body>
+<div id="viewDiv"></div>
+</body>
+</html>
