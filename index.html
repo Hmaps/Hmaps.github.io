@@ -19,12 +19,7 @@
 			width: 100%;
 			
 		  }
-		  #BasemapToggle { 
-			position: absolute;
-			top: 90px;
-			right: 5px;
-			z-index: 5;
-		  }
+		
 		</style>
 	<script>
 	require(["esri/Map", "esri/views/MapView","esri/widgets/BasemapToggle","esri/widgets/BasemapGallery",
@@ -110,10 +105,10 @@
 				  sources: [
 					{
 					  layer: parcels,
-					  searchFields: ["رقم_العقار"],
-					  displayField: "رقم_العقار",
+					  searchFields: ["number"],
+					  displayField: "number",
 					  exactMatch: true,
-					  outFields: ["رقم_العقار", "المنطقة", "Shape_Area"],
+					  outFields: ["number", "zone", "Shape__Area"],
 					  name: "رقم العقار",
 					  placeholder: "بحث عن عقار"
 					},
