@@ -70,11 +70,11 @@
                       type: "fields",
               fieldInfos: [
                 {
-                  fieldName: "رقم_العقار",
+                  fieldName: "number",
                   label: "رقم_العقار"
                 },
                 {
-                  fieldName: "المنطقة",
+                  fieldName: "zone",
                   label: "classification",
                   format: {
                     digitSeparator: true,
@@ -82,7 +82,7 @@
                   }
                 },
                 {
-                  fieldName: "Shape_Area",
+                  fieldName: "Shape__Area",
                   label: "area",
                   format: {
                     digitSeparator: true,
@@ -94,7 +94,8 @@
 					  ]
 					};	
 			var parcels = new FeatureLayer({ 
-				url: "https://services9.arcgis.com/BwlqFPXTnyyoy8fL/arcgis/rest/services/parcels_sde/FeatureServer/0?f=pjson&token=Yd9l587w27bVhENJmKdH2NAk5AVB8BFdyfVBSdZY4s8SrXibnyU5Yi-7QBIJ32p9TAy5uW0-3YoYCLvuZNtU6cDqRugb3fztg0nENnYrVTh9OYmOAtA9IH0TdH_TwEnsNdYt4fI_awLPvnJ5Hkgi2uzuWl7nhN0bndg_wSUsCT9Bqu1J8BCFu800lZ0yo1IexDJ7xBxZdjjVN8wyM_CXvD6P8zjIeto4uNoaqsf5D_OsTBylBVYK-yDs0UdfLIdePDDTP24OgFMoOwee8zLXMA..",popupTemplate: template
+				url: "https://services9.arcgis.com/BwlqFPXTnyyoy8fL/arcgis/rest/services/parcels_sde/FeatureServer/0?f=pjson&token=Yd9l587w27bVhENJmKdH2NAk5AVB8BFdyfVBSdZY4s8SrXibnyU5Yi-7QBIJ32p9TAy5uW0-3YoYCLvuZNtU6cDqRugb3fztg0nENnYrVTh9OYmOAtA9IH0TdH_TwEnsNdYt4fI_awLPvnJ5Hkgi2uzuWl7nhN0bndg_wSUsCT9Bqu1J8BCFu800lZ0yo1IexDJ7xBxZdjjVN8wyM_CXvD6P8zjIeto4uNoaqsf5D_OsTBylBVYK-yDs0UdfLIdePDDTP24OgFMoOwee8zLXMA.."
+				,popupTemplate: template
 				});
 				map.add(parcels);
 			
