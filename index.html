@@ -89,15 +89,15 @@
 					  ]
 					};	
 			var parcels = new FeatureLayer({ 
-				url: "https://services9.arcgis.com/BwlqFPXTnyyoy8fL/arcgis/rest/services/parcels_sde/FeatureServer/0?f=pjson&token=Yd9l587w27bVhENJmKdH2NAk5AVB8BFdyfVBSdZY4s8SrXibnyU5Yi-7QBIJ32p9TAy5uW0-3YoYCLvuZNtU6cDqRugb3fztg0nENnYrVTh9OYmOAtA9IH0TdH_TwEnsNdYt4fI_awLPvnJ5Hkgi2uzuWl7nhN0bndg_wSUsCT9Bqu1J8BCFu800lZ0yo1IexDJ7xBxZdjjVN8wyM_CXvD6P8zjIeto4uNoaqsf5D_OsTBylBVYK-yDs0UdfLIdePDDTP24OgFMoOwee8zLXMA.."
+				url: "https://services9.arcgis.com/BwlqFPXTnyyoy8fL/arcgis/rest/services/map1/FeatureServer/0?f=pjson&token=qqIOm9oGFwRFMnrTOEj-pV4xIkfExT5_7Af6I6jI6a-TLZYLm3Pd5ZGtNAF9Ubn1p52r1bnqGOlz23G1runZ5tD9F8pxzxaFhtI6eCenzv3NEt_q9Yaqx2bW1clg133tTtqGyrP4ei_LkVRx1zjcFC7ncBjkTvbuDqidmnxm5m9_JY2peigRp5JIXEkdhAfb8PwSk-5w1H3WtVes9gy12AqeLiFDhPy63_eprF_v2ygee4OO0ibaOeGvRURfzKWxpgl0f2-k3MOn_daowFFrSg.."
 				,popupTemplate: template
 				});
 				map.add(parcels);
 			
-			var legend = new Legend({
-				view: view, 
-				layerInfos: [ { layer: parcels,title: "parcels" }], });
-				view.ui.add(legend, "bottom-right");
+			//var legend = new Legend({
+				//view: view, 
+				//layerInfos: [ { layer: parcels,title: "parcels" }], });
+				//view.ui.add(legend, "bottom-right");
 
 			var searchWidget = new Search({
 				  view: view,
@@ -105,10 +105,10 @@
 				  sources: [
 					{
 					  layer: parcels,
-					  searchFields: ["number"],
-					  displayField: "number",
+					  searchFields: ["رقم_العقار"],
+					  displayField: "رقم_العقار",
 					  exactMatch: true,
-					  outFields: ["number", "zone", "Shape__Area"],
+					  outFields: ["رقم_العقار", "اسم_المنطقة","المنطقة", "Shape__Area","تعيين_العقار", "عدد_المالكين","حدود_العقار"],
 					  name: "رقم العقار",
 					  placeholder: "بحث عن عقار"
 					},
