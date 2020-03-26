@@ -58,8 +58,8 @@
 				}
 				});
 				//view.ui.add(basemapGallery, "top-right");
-			var template = {
-              title: "parcels",
+			var template1 = {
+              title: "العقارات",
 			   content: [
                {
                       type: "fields",
@@ -115,6 +115,100 @@
                     digitSeparator: true,
                     places: 0
                   }
+				},
+				{
+                  fieldName: "neighbour_parcels",
+                  label: "العقارات المجاورة",
+                  format: {
+                    digitSeparator: true,
+                    places: 0
+                  }
+				},
+				{
+                  fieldName: "النسبة_المئوية_للانحدار",
+                  label: "% نسبة انحدار العقار ",
+                  format: {
+                    digitSeparator: true,
+                    places: 0
+                  }
+                },
+                ]
+						}
+					  ]
+					};	
+			var template2 = {
+              title: "المالكين",
+			   content: [
+               {
+                      type: "fields",
+              fieldInfos: [
+                {
+                  fieldName: "الرقم",
+                  label: "رقم العقار"
+                },
+                {
+                  fieldName: "اسم_المالك",
+                  label: "اسم المالك",
+                  format: {
+                    digitSeparator: true,
+                    places: 0
+                  }
+				},
+				{
+                  fieldName: "المنطقة_العقارية",
+                  label: "المنطقة العقارية",
+                  format: {
+                    digitSeparator: true,
+                    places: 0
+                  }
+                },
+                {
+                  fieldName: "القسم",
+                  label: "القسم",
+                  format: {
+                    digitSeparator: true,
+                    places: 0
+                  }
+				},
+				{
+                  fieldName: "البلوك",
+                  label: " البلوك",
+                  format: {
+                    digitSeparator: true,
+                    places: 0
+                  }
+				},
+				{
+                  fieldName: "تعيين_العقار",
+                  label: "تعيين العقار",
+                  format: {
+                    digitSeparator: true,
+                    places: 0
+                  }
+				},
+				{
+                  fieldName: "عدد_الاسهم",
+                  label: " عدد الاسهم",
+                  format: {
+                    digitSeparator: true,
+                    places: 0
+                  }
+				},
+				{
+                  fieldName: "مساحة_العقار",
+                  label: "مساحة العقار",
+                  format: {
+                    digitSeparator: true,
+                    places: 0
+                  }
+				},
+				{
+                  fieldName: "النسبة_المئوية_للانحدار",
+                  label: "% نسبة انحدار العقار ",
+                  format: {
+                    digitSeparator: true,
+                    places: 0
+                  }
                 },
                 ]
 						}
@@ -122,9 +216,13 @@
 					};	
 			var parcels = new FeatureLayer({ 
 				url: "https://services9.arcgis.com/BwlqFPXTnyyoy8fL/arcgis/rest/services/map1/FeatureServer/0?f=pjson&token=qqIOm9oGFwRFMnrTOEj-pV4xIkfExT5_7Af6I6jI6a-TLZYLm3Pd5ZGtNAF9Ubn1p52r1bnqGOlz23G1runZ5tD9F8pxzxaFhtI6eCenzv3NEt_q9Yaqx2bW1clg133tTtqGyrP4ei_LkVRx1zjcFC7ncBjkTvbuDqidmnxm5m9_JY2peigRp5JIXEkdhAfb8PwSk-5w1H3WtVes9gy12AqeLiFDhPy63_eprF_v2ygee4OO0ibaOeGvRURfzKWxpgl0f2-k3MOn_daowFFrSg.."
-				,popupTemplate: template
+				,popupTemplate: template1
 				});
-				map.add(parcels);
+				var owners = new FeatureLayer({ 
+				url: "https://services9.arcgis.com/BwlqFPXTnyyoy8fL/arcgis/rest/services/map1/FeatureServer/4?f=pjson&token=qqIOm9oGFwRFMnrTOEj-pV4xIkfExT5_7Af6I6jI6a-TLZYLm3Pd5ZGtNAF9Ubn1p52r1bnqGOlz23G1runZ5tD9F8pxzxaFhtI6eCenzv3NEt_q9Yaqx2bW1clg133tTtqGyrP4ei_LkVRx1zjcFC7ncBjkTvbuDqidmnxm5m9_JY2peigRp5JIXEkdhAfb8PwSk-5w1H3WtVes9gy12AqeLiFDhPy63_eprF_v2ygee4OO0ibaOeGvRURfzKWxpgl0f2-k3MOn_daowFFrSg.."
+				,popupTemplate: template2
+				});
+				map.add(parcels,owners);
 			
 			//var legend = new Legend({
 				//view: view, 
