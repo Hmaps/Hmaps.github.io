@@ -224,7 +224,7 @@
 
 			var searchWidget = new Search({
 				  view: view,
-				  allPlaceholder: "search",
+				  allPlaceholder: "بحث",
 				  sources: [
 					{
 					  layer: parcels,
@@ -234,6 +234,15 @@
 					  outFields: ["رقم_العقار", "اسم_المنطقة","المنطقة", "Shape__Area","تعيين_العقار", "عدد_المالكين","حدود_العقار"],
 					  name: "رقم العقار",
 					  placeholder: "بحث عن عقار"
+					},
+					{
+					  layer: owners,
+					  searchFields: ["اسم_المالك"],
+					  displayField: "اسم_المالك",
+					  exactMatch: false,
+					  outFields: ["*"],
+					  name: "اسم المالك ",
+					  placeholder: "اسم المالك"
 					},
 					]
 					});
