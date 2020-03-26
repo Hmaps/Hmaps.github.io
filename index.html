@@ -202,14 +202,7 @@
                     places: 0
                   }
 				},
-				{
-                  fieldName: "النسبة_المئوية_للانحدار",
-                  label: "% نسبة انحدار العقار ",
-                  format: {
-                    digitSeparator: true,
-                    places: 0
-                  }
-                },
+				
                 ]
 						}
 					  ]
@@ -222,8 +215,8 @@
 				url: "https://services9.arcgis.com/BwlqFPXTnyyoy8fL/arcgis/rest/services/map1/FeatureServer/4?f=pjson&token=qqIOm9oGFwRFMnrTOEj-pV4xIkfExT5_7Af6I6jI6a-TLZYLm3Pd5ZGtNAF9Ubn1p52r1bnqGOlz23G1runZ5tD9F8pxzxaFhtI6eCenzv3NEt_q9Yaqx2bW1clg133tTtqGyrP4ei_LkVRx1zjcFC7ncBjkTvbuDqidmnxm5m9_JY2peigRp5JIXEkdhAfb8PwSk-5w1H3WtVes9gy12AqeLiFDhPy63_eprF_v2ygee4OO0ibaOeGvRURfzKWxpgl0f2-k3MOn_daowFFrSg.."
 				,popupTemplate: template2
 				});
-				map.add(parcels,owners);
-			
+				map.add(parcels);
+				map.add(owners);
 			//var legend = new Legend({
 				//view: view, 
 				//layerInfos: [ { layer: parcels,title: "parcels" }], });
