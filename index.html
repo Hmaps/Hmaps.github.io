@@ -6,49 +6,123 @@
 		  name="viewport"
 		  content="initial-scale=1, maximum-scale=1,user-scalable=no"
 		/>
-	<title>ABBASIYYEH</title>	
+	<title>العباسية</title>	
 	<link rel="stylesheet" href="https://js.arcgis.com/4.14/esri/themes/light/main.css"/> 
+
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	
+
+
+
 	<script src="https://js.arcgis.com/4.14/"></script>
-	   <style>
-		  html,
-		  body,
-		  #viewDiv {
-			padding: 0;
-			margin: 0;
-			height: 100%;
-			width: 100%;
-			
+	<style>
+		html,
+		body
+		{
+		  padding: 0;
+		  margin: 0;
+		  height: 100%;
+		  width: 100%;
+		  
+		}
+		#viewDiv {
+		   
+		  padding: 0;
+		  margin: 0;
+		  height: 90%;
+		  width: 99%;
 		  }
-		
-		</style>
+
+		#btn, #dropdown {
+		  float: left;
+		  text-decoration-color: red;
+		  
+		}
+		#head {
+			height: 10%;
+			padding: 10px;
+			margin: 4px;
+			background-color: rgb(16, 165, 29);
+		  width: 99%;
+		  border: solid black 2px;
+		  border-radius: 5px;
+		}
+		a {
+			text-align: center;
+			size: 10px;
+			
+		}
+
+
+	  </style>
 	<script>
-	require(["esri/widgets/AreaMeasurement2D","esri/widgets/DistanceMeasurement2D","esri/layers/BingMapsLayer","esri/widgets/ScaleBar","esri/widgets/Expand","esri/Map", "esri/views/MapView","esri/widgets/BasemapGallery",
+	require(["esri/layers/GraphicsLayer","esri/widgets/Sketch","esri/widgets/Editor/EditorViewModel","esri/widgets/Editor","esri/widgets/AreaMeasurement2D","esri/widgets/DistanceMeasurement2D","esri/layers/BingMapsLayer","esri/widgets/ScaleBar","esri/widgets/Expand","esri/Map", "esri/views/MapView","esri/widgets/BasemapGallery",
 	"esri/layers/FeatureLayer","esri/widgets/Legend","esri/widgets/LayerList","esri/widgets/Search","esri/widgets/Locate","esri/widgets/Home","dojo/on","dojo/domReady!"], 
-		function(AreaMeasurement2D,DistanceMeasurement2D,BingMapsLayer,ScaleBar,Expand,Map, MapView,BasemapGallery,FeatureLayer,Legend,LayerList,Search,Locate,Home,on) { 
+		function(GraphicsLayer,Sketch,EditorViewModel,Editor,AreaMeasurement2D,DistanceMeasurement2D,BingMapsLayer,ScaleBar,Expand,Map, MapView,BasemapGallery,
+				FeatureLayer,Legend,LayerList,Search,Locate,Home,on) { 
 			
 			var bing = new BingMapsLayer({
 				style: "aerial",
 				key: "Ah27iZ_4gTlzg7pSatMCOn8uCHAufMa0VRrPg3Mi7bDgyGNrjMqLcyB3yBvVXORk"
 				});
-			
+				
 				var map = new Map({
 					basemap: {
-						baseLayers: [bing]
+						baseLayers: [bing],
+						
 					}
 					});
 			var view = new MapView({ 
 				container: "viewDiv", 
 				map: map, 
-				zoom: 14,
+				zoom: 13,
 				center: [35.25, 33.29], 
 				});
+
+
+				var editor = new Editor({
+					 view: view,
 					
+	// 				layerInfos: [{
+	// 				layer: parcels,
+	// 				deleteEnabled: true,
+	// 				fieldConfig: [
+    //               {
+    //                 name: "number",
+    //                 label: "parcel number",
+                   
+    //               },
+    //               {
+    //                 name: "المنطقة",
+    //                 label: "المنطقة",
+                  
+    //               },
+                  
+    //             ], enabled: false, // default is true, set to false to disable editing functionality
+    // addEnabled: false, // default is true, set to false to disable the ability to add a new feature
+    // updateEnabled: false, // default is true, set to false to disable the ability to edit an existing feature
+    // deleteEnabled: false, // default is true, set to false to disable the ability to delete features
+	// 				}]
+									
+					});
+
+					var expand7 = new Expand({
+					expandIconClass: "esri-icon-edit",
+					expandTooltip: "edit",
+					view: view,
+					content: editor
+					});	
 				
 				var measurementarea = new AreaMeasurement2D({
 					view: view
 					});
 					var expand6 = new Expand({
 					expandIconClass: "esri-icon-measure-area",
+					expandTooltip: "area-measurement",
 					view: view,
 					content: measurementarea
 					});
@@ -58,6 +132,7 @@
 					
 					var expand5 = new Expand({
 					expandIconClass: "esri-icon-measure-line",
+					expandTooltip: "line-measurement",
 					view: view,
 					content: measurementWidget
 					});
@@ -92,6 +167,7 @@
 				});
 				var expand4 = new Expand({
 					expandIconClass: "esri-icon-basemap",
+					expandTooltip: "basemaps",
 					view: view,
 					content: basemapGallery
 				});
@@ -99,9 +175,7 @@
 
 
 
-
-				//view.ui.add(basemapGallery, "top-right");
-			var template1 = {
+				var template1 = {
               title: "العقارات",
 			   content: [
                {
@@ -251,11 +325,11 @@
 					  ]
 					};	
 			var parcels = new FeatureLayer({ 
-				url: "https://services9.arcgis.com/BwlqFPXTnyyoy8fL/arcgis/rest/services/map1/FeatureServer/0?f=pjson&token=qqIOm9oGFwRFMnrTOEj-pV4xIkfExT5_7Af6I6jI6a-TLZYLm3Pd5ZGtNAF9Ubn1p52r1bnqGOlz23G1runZ5tD9F8pxzxaFhtI6eCenzv3NEt_q9Yaqx2bW1clg133tTtqGyrP4ei_LkVRx1zjcFC7ncBjkTvbuDqidmnxm5m9_JY2peigRp5JIXEkdhAfb8PwSk-5w1H3WtVes9gy12AqeLiFDhPy63_eprF_v2ygee4OO0ibaOeGvRURfzKWxpgl0f2-k3MOn_daowFFrSg.."
-				,popupTemplate: template1
+				url: "https://services9.arcgis.com/BwlqFPXTnyyoy8fL/arcgis/rest/services/map2/FeatureServer/0?f=pjson&token=SmluU49FRdVd5ZVsyFrhJmCB9WBVNKYX9XrPH6F7iL93Zpw96f27yoREY-8cXHePuQhD0zdcd1EWFc4VT6OxPHzud4Hmb-JeE_Jfwdf_W3v4RnlWZ64W32n-6CjBt4SJLvKT9XduHUVJuCEIDz0c7m656bdnGktcMDCQzBON2g3p5uxZClRkBTr2ymRdidCWwvspdpJ7Zh2hEao91DB369OxdfsKQ2YXXrNTy_Gn98_ixseDRGshPKMcPaXOthLDeN2-_Afr6AxWnee0cT17xQ.."
+				,outFields: ["*"],popupTemplate: template1
 				});
 				var owners = new FeatureLayer({ 
-				url: "https://services9.arcgis.com/BwlqFPXTnyyoy8fL/arcgis/rest/services/map1/FeatureServer/4?f=pjson&token=qqIOm9oGFwRFMnrTOEj-pV4xIkfExT5_7Af6I6jI6a-TLZYLm3Pd5ZGtNAF9Ubn1p52r1bnqGOlz23G1runZ5tD9F8pxzxaFhtI6eCenzv3NEt_q9Yaqx2bW1clg133tTtqGyrP4ei_LkVRx1zjcFC7ncBjkTvbuDqidmnxm5m9_JY2peigRp5JIXEkdhAfb8PwSk-5w1H3WtVes9gy12AqeLiFDhPy63_eprF_v2ygee4OO0ibaOeGvRURfzKWxpgl0f2-k3MOn_daowFFrSg.."
+				url: "https://services9.arcgis.com/BwlqFPXTnyyoy8fL/arcgis/rest/services/map2/FeatureServer/1?f=pjson&token=SmluU49FRdVd5ZVsyFrhJmCB9WBVNKYX9XrPH6F7iL93Zpw96f27yoREY-8cXHePuQhD0zdcd1EWFc4VT6OxPHzud4Hmb-JeE_Jfwdf_W3v4RnlWZ64W32n-6CjBt4SJLvKT9XduHUVJuCEIDz0c7m656bdnGktcMDCQzBON2g3p5uxZClRkBTr2ymRdidCWwvspdpJ7Zh2hEao91DB369OxdfsKQ2YXXrNTy_Gn98_ixseDRGshPKMcPaXOthLDeN2-_Afr6AxWnee0cT17xQ.."
 				,popupTemplate: template2
 				});
 				map.add(parcels);
@@ -266,6 +340,7 @@
 				layerInfos: [ { layer: parcels,title: "parcels" }], });
 				var expand3 = new Expand({
 					expandIconClass: "esri-icon-feature-layer",
+					expandTooltip: "legend",
 					view: view,
 					content: legend
 				});
@@ -298,6 +373,7 @@
 					
 					var expand1 = new Expand({
 					expandIconClass: "esri-icon-search",
+					expandTooltip: "search",
 					view: view,
 					content: searchWidget
 				});
@@ -307,17 +383,27 @@
 			var layerList = new LayerList({ view: view });
 			var expand2 = new Expand({
 					expandIconClass: "esri-icon-layer-list",
-					title: "basemaps",
+					title: "layerlist",
+					expandTooltip: "LayerList",
 					view: view,
-					content: layerList
+					content: layerList 
 				});
 
-				view.ui.add(expand1, "top-right");
-				view.ui.add(expand4, "top-right");
-				view.ui.add(expand2, "top-right");
-				view.ui.add(expand3, "top-right");
-				view.ui.add(expand5, "top-right");
-				view.ui.add(expand6, "top-right");
+				function fn(){
+				let test=view.ui.add([expand1,expand2,expand3,expand4,expand5,expand6,expand7], "top-right");
+				
+				}
+				let doc1 = document.getElementById("bm");
+		    	doc1.addEventListener("click", fn);
+
+				 function fn1(){
+                 let test2= view.ui.remove([expand1,expand2,expand3,expand4,expand5,expand6,expand7]);
+			   }
+				let doc2 = document.getElementById("btn");
+ 		     	doc2.addEventListener("click", fn1);	
+
+
+			
 				
 			
 			
@@ -329,6 +415,20 @@
 </head>
 
 <body>
+	<div id="head"  >
+		<div class="dropdown">
+			<button id="dropdown" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Manu
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			  <a id="bm" class="dropdown-item" href="#" >tools</a>
+			 
+			</div>
+		  </div>
+		  
+		<button id="btn" style="color: red; background-color: grey; border-radius: 3px">X </button>
+		<h3 style="float: right ;">بلدية العباسية -صور</h3>
+	</div>	
 <div id="viewDiv"></div>
 </body>
 </html>
