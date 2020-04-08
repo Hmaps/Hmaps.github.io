@@ -42,9 +42,9 @@
 
 	  </style>
 	<script>
-	require(["esri/layers/GraphicsLayer","esri/widgets/Sketch","esri/widgets/Editor/EditorViewModel","esri/widgets/Editor","esri/widgets/AreaMeasurement2D","esri/widgets/DistanceMeasurement2D","esri/layers/BingMapsLayer","esri/widgets/ScaleBar","esri/widgets/Expand","esri/Map", "esri/views/MapView","esri/widgets/BasemapGallery",
+	require(["esri/views/ui/UI","esri/widgets/Editor","esri/widgets/AreaMeasurement2D","esri/widgets/DistanceMeasurement2D","esri/layers/BingMapsLayer","esri/widgets/ScaleBar","esri/widgets/Expand","esri/Map", "esri/views/MapView","esri/widgets/BasemapGallery",
 	"esri/layers/FeatureLayer","esri/widgets/Legend","esri/widgets/LayerList","esri/widgets/Search","esri/widgets/Locate","esri/widgets/Home","dojo/on","dojo/domReady!"], 
-		function(GraphicsLayer,Sketch,EditorViewModel,Editor,AreaMeasurement2D,DistanceMeasurement2D,BingMapsLayer,ScaleBar,Expand,Map, MapView,BasemapGallery,
+		function(ui,Editor,AreaMeasurement2D,DistanceMeasurement2D,BingMapsLayer,ScaleBar,Expand,Map, MapView,BasemapGallery,
 				FeatureLayer,Legend,LayerList,Search,Locate,Home,on) { 
 			
 			var bing = new BingMapsLayer({
@@ -64,6 +64,11 @@
 				zoom: 13,
 				center: [35.25, 33.29], 
 				});
+
+				let ui1= view.ui.add(document.getElementById("navbar"), "manual");
+
+
+
 
 
 				var editor = new Editor({
@@ -372,27 +377,27 @@
 				});
 
 				
-				let ui1= view.ui.add(document.getElementById("dropdown"), "top-right");
+				
 			
 
-				let ui2= view.ui.add(document.getElementById("x"), "top-right");
+				// let ui2= view.ui.add(document.getElementById("x"), "top-right");
 				
 				
 
 				
 
 				function fn(){
-				let test=view.ui.add([expand1,expand2,expand3,expand4,expand5,expand6,expand7], "top-right");
+				let test=view.ui.add([expand1,expand2,expand3,expand4,expand5,expand6,expand7], "bottom-right");
 				
 				}
 				
-				let doc1 = document.getElementById("dropdown");
+				let doc1 = document.getElementById("tools2");
 		    	doc1.addEventListener("click", fn);
 
 				 function fn1(){
                  let test2= view.ui.remove([expand1,expand2,expand3,expand4,expand5,expand6,expand7]);
 			   }
-				let doc2 = document.getElementById("x");
+				let doc2 = document.getElementById("x2");
  		     	doc2.addEventListener("click", fn1);	
 
 
@@ -409,17 +414,31 @@
 
 <body>
 	
-		<div class="dropdown">
-			<button id="dropdown" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			  TOOLS
-			</button>
-			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			  <a id="tools" class="dropdown-item" href="#" >tools</a>
-			 
-			</div>
-		  </div>
-		  
-		<button id="x" style="color: red; background-color: grey; border-radius: 3px">X </button>
+	<nav id="navbar"  class="navbar navbar-expand-lg navbar-light bg-light" style="position: relative; margin: 15px 15px 15px 70px;border: solid black 2px;border-radius: 15px;">
+		<a class="navbar-brand" href="#" style="position: absolute; right: 10px;">منطقة العباسية العقارية   صور-لبنان</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+		  <ul class="navbar-nav">
+			
+
+
+			<li class="nav-item dropdown">
+				<a style="width:70px ; background-color: rgb(187, 216, 192);border: black;border-radius: 3px;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				 Manu
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: ;">
+					<button id="tools2" class="btn btn-outline-success" type="button" style="position: relative; left:40px;" >Tools</button>
+					<button id="x2" type="button" class="btn btn-danger" style="position: relative; left:40px;">x</button>
+				  <div class="dropdown-divider"></div>
+				  <a class="dropdown-item" href="#">Something else here</a>
+				</div>
+			  </li>
+			
+		  </ul>
+		</div>
+	  </nav>
 		
 		
 <div id="viewDiv"></div>
