@@ -21,41 +21,23 @@
 	<script src="https://js.arcgis.com/4.14/"></script>
 	<style>
 		html,
-		body
+		body,#viewDiv 
 		{
 		  padding: 0;
 		  margin: 0;
 		  height: 100%;
 		  width: 100%;
 		  
+		  
 		}
-		#viewDiv {
-		   
-		  padding: 0;
-		  margin: 0;
-		  height: 90%;
-		  width: 99%;
-		  }
+		
 
-		#btn, #dropdown {
+		#x, #dropdown {
 		  float: left;
 		  text-decoration-color: red;
 		  
 		}
-		#head {
-			height: 10%;
-			padding: 10px;
-			margin: 4px;
-			background-color: rgb(16, 165, 29);
-		  width: 99%;
-		  border: solid black 2px;
-		  border-radius: 5px;
-		}
-		a {
-			text-align: center;
-			size: 10px;
-			
-		}
+		
 
 
 	  </style>
@@ -389,21 +371,32 @@
 					content: layerList 
 				});
 
+				
+				let ui1= view.ui.add(document.getElementById("dropdown"), "top-right");
+			
+
+				let ui2= view.ui.add(document.getElementById("x"), "top-right");
+				
+				
+
+				
+
 				function fn(){
 				let test=view.ui.add([expand1,expand2,expand3,expand4,expand5,expand6,expand7], "top-right");
 				
 				}
-				let doc1 = document.getElementById("bm");
+				
+				let doc1 = document.getElementById("dropdown");
 		    	doc1.addEventListener("click", fn);
 
 				 function fn1(){
                  let test2= view.ui.remove([expand1,expand2,expand3,expand4,expand5,expand6,expand7]);
 			   }
-				let doc2 = document.getElementById("btn");
+				let doc2 = document.getElementById("x");
  		     	doc2.addEventListener("click", fn1);	
 
 
-			
+				  
 				
 			
 			
@@ -415,20 +408,20 @@
 </head>
 
 <body>
-	<div id="head"  >
+	
 		<div class="dropdown">
 			<button id="dropdown" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			  Manu
+			  TOOLS
 			</button>
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			  <a id="bm" class="dropdown-item" href="#" >tools</a>
+			  <a id="tools" class="dropdown-item" href="#" >tools</a>
 			 
 			</div>
 		  </div>
 		  
-		<button id="btn" style="color: red; background-color: grey; border-radius: 3px">X </button>
-		<h3 style="float: right ;">بلدية العباسية -صور</h3>
-	</div>	
+		<button id="x" style="color: red; background-color: grey; border-radius: 3px">X </button>
+		
+		
 <div id="viewDiv"></div>
 </body>
 </html>
