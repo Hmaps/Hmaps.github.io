@@ -61,8 +61,15 @@
 			var view = new MapView({ 
 				container: "viewDiv", 
 				map: map, 
-				zoom: 13,
+				zoom: 12,
 				center: [35.25, 33.29], 
+				popup: {
+            dockEnabled: true,
+            dockOptions: {
+              buttonEnabled: false,
+              breakpoint: false
+            }
+          }
 				});
 
 				let ui1= view.ui.add(document.getElementById("navbar"), "manual");
@@ -237,9 +244,38 @@
                   }
                 },
                 ]
-						}
+						},
+
+						{
+                // You can set a media element within the popup as well. This
+                // can be either an image or a chart. You specify this within
+                // the mediaInfos. The following creates a pie chart in addition
+                // to two separate images. The chart is also set up to work with
+                // related tables. Similar to text elements, media can only be set within the content.
+                type: "media", // MediaContentElement
+                mediaInfos: [
+                  {
+                    title: "<b>Count by type</b>",
+                    type: "pie-chart",
+                    caption: "",
+                    value: {
+                      fields: ["relationships/0/Join_ID"],
+                      normalizeField: null,
+                      tooltipField: "relationships/0/Join_ID"
+                    }
+                  },
+                 
+                 
+                ]
+              },
+
+
 					  ]
-					};	
+				
+				
+				};
+
+
 			var template2 = {
               title: "المالكين",
 			   content: [
@@ -312,11 +348,11 @@
 					  ]
 					};	
 			var parcels = new FeatureLayer({ 
-				url: "https://services9.arcgis.com/BwlqFPXTnyyoy8fL/arcgis/rest/services/map2/FeatureServer/0?f=pjson&token=SmluU49FRdVd5ZVsyFrhJmCB9WBVNKYX9XrPH6F7iL93Zpw96f27yoREY-8cXHePuQhD0zdcd1EWFc4VT6OxPHzud4Hmb-JeE_Jfwdf_W3v4RnlWZ64W32n-6CjBt4SJLvKT9XduHUVJuCEIDz0c7m656bdnGktcMDCQzBON2g3p5uxZClRkBTr2ymRdidCWwvspdpJ7Zh2hEao91DB369OxdfsKQ2YXXrNTy_Gn98_ixseDRGshPKMcPaXOthLDeN2-_Afr6AxWnee0cT17xQ.."
-				,outFields: ["*"],popupTemplate: template1
+				url: "https://services9.arcgis.com/BwlqFPXTnyyoy8fL/ArcGIS/rest/services/map2/FeatureServer/1?token=JWRGcz-OW0VYpL8nqMSZYZpA2m8R5QPpmH6IzbzJTZ-dnguyB6jNBTn_cwOMN8vtbP3ypKyu5xP2djlemf4T5_ZhlaUoO_JjRZpLOEijUOg773dXMQwXgt2KS4uEeVRfEYOf71wYGkUDwH4S18uUFwnMHNfVQd3iLBMS9X-UckPcuf_8ZHKjziIQanome3Ak0EnyXcEL3rI1lzL7pEZwp1PpCqyDsR00FoQfBK378RnY5RhpBQgg3Qy9fsF4lCr_9ZN0M1rBDPrrCml500494A.."
+				,popupTemplate: template1,outFields: ["*"]
 				});
 				var owners = new FeatureLayer({ 
-				url: "https://services9.arcgis.com/BwlqFPXTnyyoy8fL/arcgis/rest/services/map2/FeatureServer/1?f=pjson&token=SmluU49FRdVd5ZVsyFrhJmCB9WBVNKYX9XrPH6F7iL93Zpw96f27yoREY-8cXHePuQhD0zdcd1EWFc4VT6OxPHzud4Hmb-JeE_Jfwdf_W3v4RnlWZ64W32n-6CjBt4SJLvKT9XduHUVJuCEIDz0c7m656bdnGktcMDCQzBON2g3p5uxZClRkBTr2ymRdidCWwvspdpJ7Zh2hEao91DB369OxdfsKQ2YXXrNTy_Gn98_ixseDRGshPKMcPaXOthLDeN2-_Afr6AxWnee0cT17xQ.."
+				url: "https://services9.arcgis.com/BwlqFPXTnyyoy8fL/ArcGIS/rest/services/map2/FeatureServer/2?f=pjson&token=JWRGcz-OW0VYpL8nqMSZYZpA2m8R5QPpmH6IzbzJTZ-dnguyB6jNBTn_cwOMN8vtbP3ypKyu5xP2djlemf4T5_ZhlaUoO_JjRZpLOEijUOg773dXMQwXgt2KS4uEeVRfEYOf71wYGkUDwH4S18uUFwnMHNfVQd3iLBMS9X-UckPcuf_8ZHKjziIQanome3Ak0EnyXcEL3rI1lzL7pEZwp1PpCqyDsR00FoQfBK378RnY5RhpBQgg3Qy9fsF4lCr_9ZN0M1rBDPrrCml500494A.."
 				,popupTemplate: template2
 				});
 				map.add(parcels);
@@ -387,7 +423,7 @@
 				
 
 				function fn(){
-				let test=view.ui.add([expand1,expand2,expand3,expand4,expand5,expand6,expand7], "bottom-right");
+				let test=view.ui.add([expand1,expand2,expand3,expand4,expand5,expand6,expand7], "top-right");
 				
 				}
 				
@@ -414,8 +450,8 @@
 
 <body>
 	
-	<nav id="navbar"  class="navbar navbar-expand-lg navbar-light bg-light" style="position: relative; margin: 7px 7px 7px 65px;border: solid black 2px;border-radius: 7px;">
-		<a class="navbar-brand" href="#" style="position: absolute; right: 10px;">منطقة العباسية العقارية </a>
+	<nav id="navbar"  class="navbar navbar-expand-lg navbar-light bg-success" style="position: relative; margin: 7px 7px 7px 65px;border: solid black 2px;border-radius: 3px; height: 50px;">
+		<a class="navbar-brand" href="#" style="position: absolute; right: 10px;font-size: 15px;">منطقة العباسية العقارية </a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 		  <span class="navbar-toggler-icon"></span>
 		</button>
