@@ -136,20 +136,32 @@
 					unit: "metric"
 					});
 					view.ui.add(scaleBar, {
-					position: "bottom-left"
+					position: "bottom-right"
 					});	
 			var homeWidget = new Home({
 				view: view
 				});
 
-				// adds the home widget to the top left corner of the MapView
-				view.ui.add(homeWidget, "top-left");
+				
+				var expand9 = new Expand({
+					expandIconClass: "esri-icon-home",
+					expandTooltip: "home",
+					view: view,
+					content: homeWidget
+				});
 			
 			 var locateWidget = new Locate({
 			    view: view 
 			   
 				});
-			view.ui.add(locateWidget, "top-left");	
+				var expand8 = new Expand({
+					expandIconClass: "esri-icon-locate",
+					expandTooltip: "gps",
+					view: view,
+					content: locateWidget
+				});
+
+
 				var basemapGallery = new BasemapGallery({
 				view: view,
 				source: {
@@ -423,7 +435,7 @@
 				
 
 				function fn(){
-				let test=view.ui.add([expand1,expand2,expand3,expand4,expand5,expand6,expand7], "top-right");
+				let test=view.ui.add([expand9,expand1,expand2,expand3,expand4,expand5,expand6,expand7,expand8], "top-left");
 				
 				}
 				
@@ -431,7 +443,7 @@
 		    	doc1.addEventListener("click", fn);
 
 				 function fn1(){
-                 let test2= view.ui.remove([expand1,expand2,expand3,expand4,expand5,expand6,expand7]);
+                 let test2= view.ui.remove([expand9,expand1,expand2,expand3,expand4,expand5,expand6,expand7,expand8]);
 			   }
 				let doc2 = document.getElementById("x2");
  		     	doc2.addEventListener("click", fn1);	
