@@ -7,488 +7,121 @@
 		  content="initial-scale=1, maximum-scale=1,user-scalable=no"
 		/>
 	<title>العباسية</title>	
-	<link rel="stylesheet" href="https://js.arcgis.com/4.14/esri/themes/light/main.css"/> 
-
-
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-	
-
-
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+	<link rel="stylesheet" href="https://js.arcgis.com/4.15/esri/themes/light/main.css"/> 
 	<script src="https://js.arcgis.com/4.14/"></script>
-	<style>
-		html,
-		body,#viewDiv 
-		{
-		  padding: 0;
-		  margin: 0;
-		  height: 100%;
-		  width: 100%;
-		  
-		  
-		}
-		
-
-		#x, #dropdown {
-		  float: left;
-		  text-decoration-color: red;
-		  
-		}
-		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="script.js"></script>
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" 
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
-	  </style>
-	<script>
-	require(["esri/views/ui/UI","esri/widgets/Editor","esri/widgets/AreaMeasurement2D","esri/widgets/DistanceMeasurement2D","esri/layers/BingMapsLayer","esri/widgets/ScaleBar","esri/widgets/Expand","esri/Map", "esri/views/MapView","esri/widgets/BasemapGallery",
-	"esri/layers/FeatureLayer","esri/widgets/Legend","esri/widgets/LayerList","esri/widgets/Search","esri/widgets/Locate","esri/widgets/Home","dojo/on","dojo/domReady!"], 
-		function(ui,Editor,AreaMeasurement2D,DistanceMeasurement2D,BingMapsLayer,ScaleBar,Expand,Map, MapView,BasemapGallery,
-				FeatureLayer,Legend,LayerList,Search,Locate,Home,on) { 
-			
-			var bing = new BingMapsLayer({
-				style: "aerial",
-				key: "Ah27iZ_4gTlzg7pSatMCOn8uCHAufMa0VRrPg3Mi7bDgyGNrjMqLcyB3yBvVXORk"
-				});
-				
-				var map = new Map({
-					basemap: {
-						baseLayers: [bing],
-						
-					}
-					});
-			var view = new MapView({ 
-				container: "viewDiv", 
-				map: map, 
-				zoom: 12,
-				center: [35.25, 33.29], 
-				popup: {
-            dockEnabled: true,
-            dockOptions: {
-              buttonEnabled: false,
-              breakpoint: false
-            }
-          }
-				});
-
-				let ui1= view.ui.add(document.getElementById("navbar"), "manual");
-
-
-
-
-
-				var editor = new Editor({
-					 view: view,
-					
-	// 				layerInfos: [{
-	// 				layer: parcels,
-	// 				deleteEnabled: true,
-	// 				fieldConfig: [
-    //               {
-    //                 name: "number",
-    //                 label: "parcel number",
-                   
-    //               },
-    //               {
-    //                 name: "المنطقة",
-    //                 label: "المنطقة",
-                  
-    //               },
-                  
-    //             ], enabled: false, // default is true, set to false to disable editing functionality
-    // addEnabled: false, // default is true, set to false to disable the ability to add a new feature
-    // updateEnabled: false, // default is true, set to false to disable the ability to edit an existing feature
-    // deleteEnabled: false, // default is true, set to false to disable the ability to delete features
-	// 				}]
-									
-					});
-
-					var expand7 = new Expand({
-					expandIconClass: "esri-icon-edit",
-					expandTooltip: "edit",
-					view: view,
-					content: editor
-					});	
-				
-				var measurementarea = new AreaMeasurement2D({
-					view: view
-					});
-					var expand6 = new Expand({
-					expandIconClass: "esri-icon-measure-area",
-					expandTooltip: "area-measurement",
-					view: view,
-					content: measurementarea
-					});
-				var measurementWidget = new DistanceMeasurement2D({
-						view: view
-						});
-					
-					var expand5 = new Expand({
-					expandIconClass: "esri-icon-measure-line",
-					expandTooltip: "line-measurement",
-					view: view,
-					content: measurementWidget
-					});
-
-			var scaleBar = new ScaleBar({
-					view: view,
-					unit: "metric"
-					});
-					view.ui.add(scaleBar, {
-					position: "bottom-right"
-					});	
-			var homeWidget = new Home({
-				view: view
-				});
-
-				
-				var expand9 = new Expand({
-					expandIconClass: "esri-icon-home",
-					expandTooltip: "home",
-					view: view,
-					content: homeWidget
-				});
-			
-			 var locateWidget = new Locate({
-			    view: view 
-			   
-				});
-				var expand8 = new Expand({
-					expandIconClass: "esri-icon-locate",
-					expandTooltip: "gps",
-					view: view,
-					content: locateWidget
-				});
-
-
-				var basemapGallery = new BasemapGallery({
-				view: view,
-				source: {
-				portal: {
-				url: "https://www.arcgis.com",
-				useVectorBasemaps: true  
-						}
-				}
-				});
-				var expand4 = new Expand({
-					expandIconClass: "esri-icon-basemap",
-					expandTooltip: "basemaps",
-					view: view,
-					content: basemapGallery
-				});
-				
-
-
-
-				var template1 = {
-              title: "العقارات",
-			   content: [
-               {
-                      type: "fields",
-              fieldInfos: [
-                {
-                  fieldName: "number",
-                  label: "رقم العقار"
-                },
-                {
-                  fieldName: "المنطقة",
-                  label: "التصنيف",
-                  format: {
-                    digitSeparator: true,
-                    places: 0
-                  }
-				},
-				{
-                  fieldName: "اسم_المنطقة",
-                  label: "اسم المنطقة",
-                  format: {
-                    digitSeparator: true,
-                    places: 0
-                  }
-                },
-                {
-                  fieldName: "Shape__Area",
-                  label: "مساحة العقار م.م",
-                  format: {
-                    digitSeparator: true,
-                    places: 0
-                  }
-				},
-				{
-                  fieldName: "الاستثمار_السطحي",
-                  label: "الاستثمار السطحي",
-                  format: {
-                    digitSeparator: true,
-                    places: 0
-                  }
-				},
-				{
-                  fieldName: "الاستثمار_العام",
-                  label: "الاستثمار العام",
-                  format: {
-                    digitSeparator: true,
-                    places: 0
-                  }
-				},
-				{
-                  fieldName: "عدد_الطوابق",
-                  label: " عدد الطوابق الاقصى",
-                  format: {
-                    digitSeparator: true,
-                    places: 0
-                  }
-				},
-				{
-                  fieldName: "neighbour_parcels",
-                  label: "العقارات المجاورة",
-                  format: {
-                    digitSeparator: true,
-                    places: 0
-                  }
-				},
-				{
-                  fieldName: "النسبة_المئوية_للانحدار",
-                  label: "% نسبة انحدار العقار ",
-                  format: {
-                    digitSeparator: true,
-                    places: 0
-                  }
-                },
-                ]
-						},
-
-						{
-                // You can set a media element within the popup as well. This
-                // can be either an image or a chart. You specify this within
-                // the mediaInfos. The following creates a pie chart in addition
-                // to two separate images. The chart is also set up to work with
-                // related tables. Similar to text elements, media can only be set within the content.
-                type: "media", // MediaContentElement
-                mediaInfos: [
-                  {
-                    title: "<b>Count by type</b>",
-                    type: "pie-chart",
-                    caption: "",
-                    value: {
-                      fields: ["relationships/0/Join_ID"],
-                      normalizeField: null,
-                      tooltipField: "relationships/0/Join_ID"
-                    }
-                  },
-                 
-                 
-                ]
-              },
-
-
-					  ]
-				
-				
-				};
-
-
-			var template2 = {
-              title: "المالكين",
-			   content: [
-               {
-                      type: "fields",
-              fieldInfos: [
-                {
-                  fieldName: "الرقم",
-                  label: "رقم العقار"
-                },
-                {
-                  fieldName: "اسم_المالك",
-                  label: "اسم المالك",
-                  format: {
-                    digitSeparator: true,
-                    places: 0
-                  }
-				},
-				{
-                  fieldName: "المنطقة_العقارية",
-                  label: "المنطقة العقارية",
-                  format: {
-                    digitSeparator: true,
-                    places: 0
-                  }
-                },
-                {
-                  fieldName: "القسم",
-                  label: "القسم",
-                  format: {
-                    digitSeparator: true,
-                    places: 0
-                  }
-				},
-				{
-                  fieldName: "البلوك",
-                  label: " البلوك",
-                  format: {
-                    digitSeparator: true,
-                    places: 0
-                  }
-				},
-				{
-                  fieldName: "تعيين_العقار",
-                  label: "تعيين العقار",
-                  format: {
-                    digitSeparator: true,
-                    places: 0
-                  }
-				},
-				{
-                  fieldName: "عدد_الاسهم",
-                  label: " عدد الاسهم",
-                  format: {
-                    digitSeparator: true,
-                    places: 0
-                  }
-				},
-				{
-                  fieldName: "مساحة_العقار",
-                  label: "مساحة العقار",
-                  format: {
-                    digitSeparator: true,
-                    places: 0
-                  }
-				},
-				
-                ]
-						}
-					  ]
-					};	
-			var parcels = new FeatureLayer({ 
-				url: "https://services9.arcgis.com/BwlqFPXTnyyoy8fL/ArcGIS/rest/services/map2/FeatureServer/1?token=JWRGcz-OW0VYpL8nqMSZYZpA2m8R5QPpmH6IzbzJTZ-dnguyB6jNBTn_cwOMN8vtbP3ypKyu5xP2djlemf4T5_ZhlaUoO_JjRZpLOEijUOg773dXMQwXgt2KS4uEeVRfEYOf71wYGkUDwH4S18uUFwnMHNfVQd3iLBMS9X-UckPcuf_8ZHKjziIQanome3Ak0EnyXcEL3rI1lzL7pEZwp1PpCqyDsR00FoQfBK378RnY5RhpBQgg3Qy9fsF4lCr_9ZN0M1rBDPrrCml500494A.."
-				,popupTemplate: template1,outFields: ["*"]
-				});
-				var owners = new FeatureLayer({ 
-				url: "https://services9.arcgis.com/BwlqFPXTnyyoy8fL/ArcGIS/rest/services/map2/FeatureServer/2?f=pjson&token=JWRGcz-OW0VYpL8nqMSZYZpA2m8R5QPpmH6IzbzJTZ-dnguyB6jNBTn_cwOMN8vtbP3ypKyu5xP2djlemf4T5_ZhlaUoO_JjRZpLOEijUOg773dXMQwXgt2KS4uEeVRfEYOf71wYGkUDwH4S18uUFwnMHNfVQd3iLBMS9X-UckPcuf_8ZHKjziIQanome3Ak0EnyXcEL3rI1lzL7pEZwp1PpCqyDsR00FoQfBK378RnY5RhpBQgg3Qy9fsF4lCr_9ZN0M1rBDPrrCml500494A.."
-				,popupTemplate: template2
-				});
-				map.add(parcels);
-				map.add(owners);
-				
-			var legend = new Legend({
-				view: view, 
-				layerInfos: [ { layer: parcels,title: "parcels" }], });
-				var expand3 = new Expand({
-					expandIconClass: "esri-icon-feature-layer",
-					expandTooltip: "legend",
-					view: view,
-					content: legend
-				});
-				
-
-			var searchWidget = new Search({
-				  view: view,
-				  allPlaceholder: "بحث",
-				  sources: [
-					{
-					  layer: parcels,
-					  searchFields: ["رقم_العقار"],
-					  displayField: "رقم_العقار",
-					  exactMatch: true,
-					  outFields: ["رقم_العقار", "اسم_المنطقة","المنطقة", "Shape__Area","تعيين_العقار", "عدد_المالكين","حدود_العقار"],
-					  name: "رقم العقار",
-					  placeholder: "بحث عن عقار"
-					},
-					{
-					  layer: owners,
-					  searchFields: ["اسم_المالك"],
-					  displayField: "اسم_المالك",
-					  exactMatch: false,
-					  outFields: ["*"],
-					  name: "اسم المالك ",
-					  placeholder: "اسم المالك"
-					},
-					]
-					});
-					
-					var expand1 = new Expand({
-					expandIconClass: "esri-icon-search",
-					expandTooltip: "search",
-					view: view,
-					content: searchWidget
-				});
-				
-
-
-			var layerList = new LayerList({ view: view });
-			var expand2 = new Expand({
-					expandIconClass: "esri-icon-layer-list",
-					title: "layerlist",
-					expandTooltip: "LayerList",
-					view: view,
-					content: layerList 
-				});
-
-				
-				
-			
-
-				// let ui2= view.ui.add(document.getElementById("x"), "top-right");
-				
-				
-
-				
-
-				function fn(){
-				let test=view.ui.add([expand9,expand1,expand2,expand3,expand4,expand5,expand6,expand7,expand8], "top-left");
-				
-				}
-				
-				let doc1 = document.getElementById("tools2");
-		    	doc1.addEventListener("click", fn);
-
-				 function fn1(){
-                 let test2= view.ui.remove([expand9,expand1,expand2,expand3,expand4,expand5,expand6,expand7,expand8]);
-			   }
-				let doc2 = document.getElementById("x2");
- 		     	doc2.addEventListener("click", fn1);	
-
-
-				  
-				
-			
-			
-		   
-	});
 	
-</script>
-
 </head>
+
 
 <body>
 	
-	<nav id="navbar"  class="navbar navbar-expand-lg navbar-light bg-success" style="position: relative; margin: 7px 7px 7px 65px;border: solid black 2px;border-radius: 3px; height: 50px;">
-		<a class="navbar-brand" href="#" style="position: absolute; right: 10px;font-size: 15px;">منطقة العباسية العقارية </a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-		  <span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-		  <ul class="navbar-nav">
-			
+	<nav id="navbar"  class="nav_bar">
+		<i class="fa fa-bars fa-2x  manu"  aria-hidden="true" ></i>		
+		<b for="">منطقة العباسية العقارية</b>	
+	</nav>
 
+	<div class="manu-box">
+		<div id="search" class="search tool">Search</div> <br>
+		<div id="basemaps" class="basemaps tool">Basemaps</div><br>
+		<div id="legend" class="legend tool">Legend</div> <br>
+		<div id="edit" class="edit tool">Edit</div> <br>
+		<div id="measure" class="measure tool">measurment</div> <br>
+		<div id="layer-list" class="layer-list tool">Layer list</div> <br>
+		<div id="classification" class="classification tool">charts</div> <br>
+	</div>
 
-			<li class="nav-item dropdown">
-				<a style="width:70px ; background-color: rgb(187, 216, 192);border: black;border-radius: 3px;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				 Manu
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-					<button id="tools2" class="btn btn-outline-success" type="button" style="position: relative; left:40px;" >Tools</button>
-					<button id="x2" type="button" class="btn btn-danger" style="position: relative; left:40px;">x</button>
-				  <div class="dropdown-divider"></div>
-				  <a class="dropdown-item" href="#">Something else here</a>
-				</div>
-			  </li>
+	<div id="tool-container" class="tool-container">
+		<button class="hide-tool-container">X</button>
+		<div id="search-c" class="search-c tool-c">Search</div> <br>
+		<div id="basemaps-c" class="basemaps-c tool-c">Basemaps</div><br>
+		<div id="legend-c" class="legend-c tool-c">Legend</div> <br>
+		<div id="edit-c" class="edit-c tool-c">Edit</div> <br>
+		<div id="measure-c" class="measure-c tool-c">Measure Area & Distance</div> <br>
+		<div id="layer-list-c" class="layer-list-c tool-c">Layer list <br>
 			
-		  </ul>
+			<input type="checkbox" class="first" checked> <b>  العقارات و المالكين</b> <br><br>
+			<input type="checkbox" class="second"><b> املاك البلدية</b> <br><br>
+			<input type="checkbox" class="third"> <b> املاك الجمهورية</b> <br><br>
+			<input type="checkbox" class='forth'> <b> املاك الدولة الخاصة</b> <br><br>
+			<input type="checkbox" class="fifth"> <b> حدائق مفرزة</b> <br>	<br>
+			<input type="checkbox" class="sixth"> <b>  التصنيفات</b> <br>
+			
+		</div> 
+		<div id="classification-c" class="classification-c tool-c"><b> المساحة الاجمالية لكل تصنيف </b> 
+			<canvas id="myChart" width="400" height="400"></canvas>
 		</div>
-	  </nav>
+
+	</div>
+
+	<div id="relation" class="relation ">
+		<i class="fa fa-arrows-alt fa-2x" aria-hidden="true"></i>
+		<button class="hide-chart">X</button><br><br>
+		<b> توزيع نسب المالكين للعقار</b> 
+		<canvas id="myChart2" width="400" height="400"></canvas>
+	</div>
+
 		
 		
-<div id="viewDiv"></div>
+	<div id="viewDiv"></div>
+	
+<script>
+	var toolsContainer=$(".tool-container")
+	var manubox= $(".manu-box")
+
+	$(".manu").click(function(){
+		toolsContainer.animate({right:"-450px"},500)
+		toolsContainer.slideUp()
+		
+		manubox.toggleClass("show");
+		if(manubox.hasClass("show")){
+			manubox.animate({
+				left:"3px"
+			},500)
+		}else{manubox.animate({left:"-400px"},500)}
+		})
+
+
+	$(".tool").click(function(){
+		
+			toolsContainer.slideDown()
+			$(".tool-container").animate({right:"3px"},500)
+		})
+	
+	$(".hide-tool-container").click(function(){
+		toolsContainer.animate({right:"-450px"},500)
+		toolsContainer.slideUp()
+	})
+	$(".hide-chart").click(function(){
+		$(this).parent().slideUp(500)
+	})
+
+	$(".relation i").click(function(){
+		$(this).toggleClass("show");
+		if($(this).hasClass("show")){
+			$(this).parent().animate({
+			width:"95%",
+			height:"90%"
+		},500)
+		}else{
+			$(this).parent().animate({
+				width:"40%", height:"30%"
+			})
+		}
+		
+	})
+
+
+	
+	
+</script>
+
 </body>
 </html>
