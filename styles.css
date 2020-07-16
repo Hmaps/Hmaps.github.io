@@ -55,12 +55,14 @@ body
 }
 
 .relation{
-    position: absolute;  display: none;  top: 8%;  width: 40%; height: 30%;  z-index: 3;
+    position: absolute;  display: none;  top: 8%;  width: 90%; height: 90%;  z-index: 3;
     background-color: white;overflow: auto; right:5px;
 }.hide-chart{top: 3px; left: 3px; padding: 5px; border-radius: 4px; background-color: tomato; 
 }
 .relation i{
     padding: 3px;
     float: right;
+}.chart-icon{
+    position: absolute; z-index: 4; top:10%; right: 15px; display: none; color: red;
 }
 

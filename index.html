@@ -35,7 +35,7 @@
 		<div id="edit" class="edit tool">Edit</div> <br>
 		<div id="measure" class="measure tool">measurment</div> <br>
 		<div id="layer-list" class="layer-list tool">Layer list</div> <br>
-		<div id="classification" class="classification tool">charts</div> <br>
+		<div id="classification" class="classification tool">classification</div> <br>
 	</div>
 
 	<div id="tool-container" class="tool-container">
@@ -61,8 +61,9 @@
 
 	</div>
 
-	<div id="relation" class="relation ">
-		<i class="fa fa-arrows-alt fa-2x" aria-hidden="true"></i>
+
+	<i class="fa fa-bar-chart fa-2x chart-icon" aria-hidden="true"></i>
+	<div id="relation" class="relation ">		
 		<button class="hide-chart">X</button><br><br>
 		<b> توزيع نسب المالكين للعقار</b> 
 		<canvas id="myChart2" width="400" height="400"></canvas>
@@ -78,7 +79,7 @@
 
 	$(".manu").click(function(){
 		toolsContainer.animate({right:"-450px"},500)
-		toolsContainer.slideUp()
+		//toolsContainer.slideUp()
 		
 		manubox.toggleClass("show");
 		if(manubox.hasClass("show")){
@@ -101,21 +102,11 @@
 	})
 	$(".hide-chart").click(function(){
 		$(this).parent().slideUp(500)
+		$(".chart-icon").hide(500);
 	})
 
-	$(".relation i").click(function(){
-		$(this).toggleClass("show");
-		if($(this).hasClass("show")){
-			$(this).parent().animate({
-			width:"95%",
-			height:"90%"
-		},500)
-		}else{
-			$(this).parent().animate({
-				width:"40%", height:"30%"
-			})
-		}
-		
+	$(".chart-icon").click(function(){
+		$(".relation").slideToggle(500)
 	})
 
 

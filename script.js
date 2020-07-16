@@ -11,10 +11,10 @@ meaure=$(".measure")
 require(["esri/request","esri/widgets/Editor","esri/widgets/AreaMeasurement2D",
 "esri/widgets/DistanceMeasurement2D","esri/layers/BingMapsLayer","esri/widgets/ScaleBar",
 "esri/widgets/Expand","esri/Map", "esri/views/MapView","esri/widgets/BasemapGallery",
-"esri/layers/FeatureLayer","esri/widgets/Legend","esri/widgets/LayerList","esri/widgets/Search",
-"esri/widgets/Locate","esri/widgets/Home","esri/widgets/Measurement"], 
+"esri/layers/FeatureLayer","esri/widgets/Legend","esri/widgets/Search",
+"esri/widgets/Locate","esri/widgets/Home"], 
 		function(esriRequest,Editor,AreaMeasurement2D,DistanceMeasurement2D,BingMapsLayer,ScaleBar,Expand,Map,MapView,
-			BasemapGallery,FeatureLayer,Legend,LayerList,Search,Locate,Home,Measurement) { 
+			BasemapGallery,FeatureLayer,Legend,Search,Locate,Home) { 
 		
 	//bing/map/view			
 			var bing = new BingMapsLayer({
@@ -471,9 +471,11 @@ require(["esri/request","esri/widgets/Editor","esri/widgets/AreaMeasurement2D",
 			dataValues=Array();
 			for(let i=0;i<result1.features.length;i++){
 				let a=result1.features[i].attributes.نوع_المنطقة;
-				let b=result1.features[i].attributes.Shape__Area
+				let b=result1.features[i].attributes.Shape__Area;
+				let c= b/1000000; let d= c.toFixed(2)
+				
 			zone.push(a);
-			area.push(b/1000000);
+			area.push(d);
 			dataValues.push(0);
 			color1.push("#"+Math.floor(Math.random()*10000))
 
@@ -571,8 +573,8 @@ chart2 = new Chart(ctx2, {
 	  }
 	  
 	  view.on("click",function(e){      
-		queryRelated(e.mapPoint)
-		$(".relation").slideDown(500)
+		queryRelated(e.mapPoint);
+		$(".chart-icon").show(500)
 	  })
 
 
